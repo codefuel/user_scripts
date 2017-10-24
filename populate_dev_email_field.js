@@ -37,6 +37,7 @@ var inline_src = (<><![CDATA[
           height: ${devToolbarHeight};
           z-index: 1000;
           overflow: hidden;
+          line-height: 14px;
         }
         .devContentContainer {
           display: flex;
@@ -47,8 +48,16 @@ var inline_src = (<><![CDATA[
         .toggleContentContainer {
           position: absolute;
           top: 4px;
+          right: 50px;
+          font-size: 0.75em;
+          cursor: pointer;
+        }
+        .closeDevBar {
+          position: absolute;
+          top: 4px;
           right: 10px;
           font-size: 0.75em;
+          cursor: pointer;
         }
         .devClientInfo {
           display: flex;
@@ -79,6 +88,7 @@ var inline_src = (<><![CDATA[
           ${devDataContent.join("\n")}
         </div>
         <div class="toggleContentContainer">Toggle</div>
+        <div class="closeDevBar">hide</div>
       </div>`;
 
     document.body.insertAdjacentHTML('afterbegin', devContentCSS);
@@ -91,7 +101,15 @@ var inline_src = (<><![CDATA[
         'click',
         x => {
           const element = x.currentTarget.querySelector('.devEmail');
-          const emailElement = document.getElementsByName('email')[0];
+
+          let emailElement;
+          if (document.getElementsByName('email')[0]) {
+            emailElement = document.getElementsByName('email')[0];
+          } else if (document.getElementById('et_pb_email_1')) {
+            emailElement = document.getElementById('et_pb_email_1');
+          } else if (document.getElementsByName('auth_user')[0]) {
+            emailElement = document.getElementsByName('auth_user')[0];
+          }
 
           emailElement.value=element.textContent;
 
@@ -111,7 +129,21 @@ var inline_src = (<><![CDATA[
     devContentContainer.addEventListener(
       'click',
       x => {
-        document.querySelector('#devToolbar').setAttribute('style', 'height:auto');
+        const el = document.querySelector('#devToolbar');
+
+        if (el.offsetHeight > parseInt(devToolbarHeight)) {
+          el.setAttribute('style', `height: ${devToolbarHeight}`);
+        } else {
+          el.setAttribute('style', 'height:auto');
+        }
+      },
+      false );
+
+    const closeDevBarElement = document.querySelector('.closeDevBar');
+    closeDevBarElement.addEventListener(
+      'click',
+      x => {
+        document.querySelector('#devToolbar').setAttribute('style', 'display: none;');
       },
       false );
         
