@@ -4,8 +4,7 @@
 // @version      0.1
 // @description  Populate email field with a dev email address
 // @author       Aaron Sargent
-// @include      https://m.ishifts.com/*
-// @include      https://m.servola.org:8080/*
+// @include      *
 // @run-at       document-end
 // @require      https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.18.2/babel.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.16.0/polyfill.js
