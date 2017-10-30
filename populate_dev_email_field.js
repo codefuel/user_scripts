@@ -19,6 +19,7 @@ var inline_src = (<><![CDATA[
     /* jshint esversion: 6 */
 
     const devData = [
+      ["Client", "Name", "emailAddress", "Comments"],
     ];
 
     const devToolbarDiv = document.createElement('div');
@@ -38,6 +39,9 @@ var inline_src = (<><![CDATA[
           z-index: 1000;
           overflow: hidden;
           line-height: 14px;
+        }
+        #devToolbar:hover {
+          height: auto;
         }
         .devContentContainer {
           display: flex;
